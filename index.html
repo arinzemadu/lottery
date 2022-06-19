@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Airdrop Nation</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+                <a class="navbar-brand" href="#!">Airdrop Nation</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="current_players.html">Current Players</a></li>
+<!--                         <li class="nav-item"><a class="nav-link" href="#!">Results</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Services</a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Content-->
+        <div class="container px-4 px-lg-5">
+            <!-- Heading Row-->
+            <div class="row gx-4 gx-lg-5 align-items-center my-5">
+                <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="..." /></div>
+                <div class="col-lg-5">
+                    <h1 class="font-weight-light">Send 1 Matic to enter</h1>
+                    <p>Please read: To enter send one matic to the contract address, Click the refresh button and search for your ETH wallet address to confirm entry.</p>
+                    <a class="btn btn-primary" href="#!">Enter Draw</a>
+                </div>
+            </div>
+            <!-- Call to Action-->
+            <div class="card text-white bg-secondary my-5 py-4 text-center">
+                <div class="card-body"><p class="text-white m-0 contract_address"></p></div>
+            </div>
+            <!-- Content Row-->
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Contract Balance</h2>
+                            <p id="eth_balance" class="card-text"></p>
+                        </div>
+                        <div class="card-footer">
+                             <a class="btn btn-primary btn-sm players" href="#!">Refresh</a> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Opening Airdrop</h2>
+                            <p class="card-text"></p>
+                            <ul>
+                                <li>Airdrop 200 Zerofi tokens </li>
+                                <li>90% share of the prize pool</li>
+                                <li>Airdrop 1000 blackbeard tokens</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">Share</a></div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Previous Winners</h2>
+                            <p class="card-text"></p>
+                        </div>
+                        <!-- <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; AirDrop Nation 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/scripts.js"></script>
+        <script src="js/web3.min.js"></script>
+         <script>
+      // Initialize Web3
+      if (typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+      } else {
+        web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
+      }
+
+
+
+      console.log(Web3.utils);
+
+      // Set Account
+      web3.eth.defaultAccount = web3.eth.accounts[0];
+
+      // Set Contract Abi
+      var contractAbi = [
+  {
+    "inputs": [],
+    "name": "pickWinner",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  },
+  {
+    "inputs": [],
+    "name": "admin",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getBalance",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getBalancecontract",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getPlayers",
+    "outputs": [
+      {
+        "internalType": "address payable[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "players",
+    "outputs": [
+      {
+        "internalType": "address payable",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]; // Add Your Contract ABI here!!!
+
+      // Set Contract Address
+      var contractAddress = '0x07460B297e8eA41E3d53A00f5E954dF11CC364dd'; // Add Your Contract address here!!!
+
+      // Set the Contract
+      var contract = web3.eth.contract(contractAbi).at(contractAddress);
+      const var_players = contract.getPlayers.call();
+
+      getContractaddress();
+      getBalance();
+
+        $('.winner').click(function() {
+          console.log(contract.pickWinner());
+          });
+
+        $('.players').click(function() {
+         var_players.forEach(listPlayers);
+          });
+
+      // Change the Candidate Name
+      $('form').on('submit', function(event) {
+        event.preventDefault();
+      })
+
+
+
+        function getContractaddress() {
+         //get contract address  
+            var address_text = 'Contract address: ';
+            var address_text_render = address_text + contractAddress;
+            $('.contract_address').html(address_text_render); 
+        }
+
+
+        function getBalance() {
+            var wei, balance
+           // address = document.getElementById("address").value
+            try {
+                web3.eth.getBalance(contractAddress, function (error, wei) {
+                    if (!error) {
+                        var balance = web3.fromWei(wei, 'ether');
+                        document.getElementById("eth_balance").innerHTML = balance + " ETH";
+                    }
+                });
+            } catch (err) {
+                document.getElementById("eth_balance").innerHTML = err;
+            }
+        }
+
+
+
+let text = "";
+
+var_players.forEach(listPlayers);
+
+document.getElementById("players").innerHTML = text;
+ 
+function listPlayers(item, index) {
+  text += index + ": " + item + "<br>"; 
+}
+
+
+
+    </script>
+    </body>
+</html>
